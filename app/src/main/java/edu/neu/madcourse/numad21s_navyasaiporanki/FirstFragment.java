@@ -33,12 +33,12 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        Button clickButton = view.findViewById(R.id.btnClick);
-        clickButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ClickyClick.class));
-            }
-        });
+//        Button clickButton = view.findViewById(R.id.btnClick);
+//        clickButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), ClickyClick.class));
+//            }
+//        });
     }
 }
