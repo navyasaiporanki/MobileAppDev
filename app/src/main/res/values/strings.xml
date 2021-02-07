@@ -24,4 +24,5 @@
     <string name="btnE">E</string>
     <string name="btnF">F</string>
     <string name="btnA">A</string>
+    <string name="textview" />
 </resources>
