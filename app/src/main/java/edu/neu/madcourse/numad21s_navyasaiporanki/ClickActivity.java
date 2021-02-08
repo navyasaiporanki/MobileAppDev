@@ -7,18 +7,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class ClickActivity extends AppCompatActivity {
 
-    TextView read;
+    TextView dataToBeSaved;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click);
-        read = findViewById(R.id.displayText);
-        loadSaveRecord();
+        dataToBeSaved = findViewById(R.id.displayText);
+        getSavedDataIfAny();
     }
 
     public void btnPressed(View view){
@@ -36,20 +35,19 @@ public class ClickActivity extends AppCompatActivity {
     }
 
     public void saveData() {
-        //saveLast("last_record", read.getText().toString());
-        saveLastData("last_record", read.getText().toString());
+        saveUserClickedData("last_record", dataToBeSaved.getText().toString());
     }
 
-    private void saveLastData(String key, String value) {
+    private void saveUserClickedData(String key, String value) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key,value);
         editor.apply();
     }
 
-    private void loadSaveRecord() {
+    private void getSavedDataIfAny() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        read.setText(sharedPreferences.getString("last_record", ""));
+        dataToBeSaved.setText(sharedPreferences.getString("last_record", ""));
     }
 
 }
