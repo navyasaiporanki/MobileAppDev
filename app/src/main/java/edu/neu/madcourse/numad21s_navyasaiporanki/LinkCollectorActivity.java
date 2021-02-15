@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE;
@@ -70,9 +72,21 @@ public class LinkCollectorActivity extends AppCompatActivity {
         alertDialogFORM.getButton(BUTTON_POSITIVE).setOnClickListener(v -> {
             String nameEntered = editTextName.getText().toString();
             String inputURLEntered = editTextURL.getText().toString();
+
+//            try {
+//                URL url = new URL(inputURLEntered);
+//                if (!Patterns.WEB_URL.matcher(url.toString()).matches()) {
+//                    Snackbar snackBarFail = Snackbar.make(v,R.string.string_error_message, Snackbar.LENGTH_LONG);
+//                    snackBarFail.show();
+//                }
+//            } catch (MalformedURLException e) {
+//                Snackbar snackBarFail = Snackbar.make(v,R.string.string_error_message, Snackbar.LENGTH_LONG);
+//                snackBarFail.show();
+//            }
             if (nameEntered.isEmpty() || inputURLEntered.isEmpty()
                     //Patterns.WEB_URL.matcher(inputURLEntered).matches()
             ) {
+
                 Snackbar snackBarFail = Snackbar.make(v,R.string.string_error_message, Snackbar.LENGTH_LONG);
                 snackBarFail.show();
 
@@ -82,7 +96,7 @@ public class LinkCollectorActivity extends AppCompatActivity {
                 listOfNames.add(nameEntered);
                 listOfUrls.add(inputURLEntered);
                 View emptyListMessageView = findViewById(R.id.addURLTextView);
-                emptyListMessageView.setVisibility(View.GONE);
+                //emptyListMessageView.setVisibility(View.GONE);
                 Snackbar snackBarSuccess = Snackbar.make(view, R.string.string_url_added, Snackbar.LENGTH_LONG);
                 snackBarSuccess.show();
                 alertDialogFORM.dismiss();
