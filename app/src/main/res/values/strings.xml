@@ -13,6 +13,11 @@
     <string name="email">poranki.n@northeastern.edu</string>
     <string name="title_activity_clicky_click">ClickyClick</string>
     <string name="clicky_click">Clicky Click</string>
+    <string name="string_add_url">Add a Url by clicking on below button</string>
+    <string name="string_url_name">Website Name</string>
+    <string name="string_url">url of the website</string>
+    <string name="string_url_added">Successfully Added the Url</string>
+    <string name="string_error_message">URL is not valid!</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -25,4 +30,6 @@
     <string name="btnF">F</string>
     <string name="btnA">A</string>
     <string name="textview" />
+    <string name="addLink">AddLink</string>
+    <string name="floatingBtn">Floating Button</string>
 </resources>

@@ -40,5 +40,13 @@ public class FirstFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ClickActivity.class));
             }
         });
+
+        Button linkClickButton = view.findViewById(R.id.btnAddLink);
+        linkClickButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LinkCollectorActivity.class));
+            }
+        });
     }
 }
