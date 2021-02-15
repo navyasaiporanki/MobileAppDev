@@ -3,9 +3,7 @@ package edu.neu.madcourse.numad21s_navyasaiporanki;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Patterns;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -15,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import static androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE;
