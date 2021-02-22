@@ -48,5 +48,14 @@ public class FirstFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LinkCollectorActivity.class));
             }
         });
+
+
+        Button locationButton = view.findViewById(R.id.btnLocation);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LocatorActivity.class));
+            }
+        });
     }
 }

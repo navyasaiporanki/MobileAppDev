@@ -3,6 +3,10 @@
     package="edu.neu.madcourse.numad21s_navyasaiporanki">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- To request foreground location access, declare one of these permissions. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,10 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_np_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SNavyasaiPoranki">
-        <activity android:name=".LinkCollectorActivity"></activity>
+        <activity android:name=".LocatorActivity"></activity>
+        <activity android:name=".LinkCollectorActivity" />
         <activity
             android:name=".ClickActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"></activity>
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.

@@ -32,4 +32,6 @@
     <string name="textview" />
     <string name="addLink">AddLink</string>
     <string name="floatingBtn">Floating Button</string>
+    <string name="btnLocation">Location</string>
+    <string name="btnCurrentLocation">CurrentLocation</string>
 </resources>
