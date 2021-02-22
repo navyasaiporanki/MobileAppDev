@@ -20,6 +20,9 @@ public class LocatorActivity extends AppCompatActivity {
     LocationManager locationManager;
     String gpsEnabledMessage = "GPS is starting. Please Wait or Try Again";
     String pleaseEnableGPS = "Please Enable GPS!";
+    String[] permissionStrings = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +32,7 @@ public class LocatorActivity extends AppCompatActivity {
 
     public void getCurrentLocation(View view) {
 
-        String[] permissionStrings = {
-                Manifest.permission.ACCESS_FINE_LOCATION
-        };
-
-        ActivityCompat.requestPermissions(this, new String[] {
-                Manifest.permission.ACCESS_FINE_LOCATION
-        }, 1);
+        ActivityCompat.requestPermissions(this, permissionStrings, 1);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         
         if (!locationManager.isProviderEnabled(locationManager.GPS_PROVIDER)){
@@ -48,22 +45,18 @@ public class LocatorActivity extends AppCompatActivity {
 
     private void updateOrGetUsersCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(LocatorActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ){
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                    } ,
-                    1);
+            ActivityCompat.requestPermissions(this, permissionStrings, 1);
         }
         else if (ActivityCompat.checkSelfPermission(LocatorActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                    } ,
-                    1);
+            ActivityCompat.requestPermissions(this, permissionStrings , 1);
         }
         else{
             TextView txtLocationValue = findViewById(R.id.txtLocationValue);
+
             Location currentGPS =  locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             Location networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             Location passiveLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
             if (currentGPS != null){
                 txtLocationValue.setText(String.format("Latitude: %s, Longitude: %s", currentGPS.getLatitude(), currentGPS.getLongitude()));
             }
@@ -75,34 +68,22 @@ public class LocatorActivity extends AppCompatActivity {
             }
             else{
                 Snackbar.make(txtLocationValue, gpsEnabledMessage, Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new Listener());
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new Listener());
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(@NonNull Location location) {
+
+                    }
+                });
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(@NonNull Location location) {
+
+                    }
+                });
             }
         }
     }
 
-    public static class Listener implements LocationListener {
-
-        @Override
-        public void onLocationChanged(@NonNull Location location) {
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(@NonNull String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(@NonNull String provider) {
-
-        }
-    }
 
 
 }
