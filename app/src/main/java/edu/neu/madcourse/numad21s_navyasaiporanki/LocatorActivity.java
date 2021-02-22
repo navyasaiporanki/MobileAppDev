@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class LocatorActivity extends AppCompatActivity {
     LocationManager locationManager;
     String gpsEnabledMessage = "GPS is starting. Please Wait or Try Again";
-    String pleaseEnableGPS = "Please Enable GPS!";
+    String pleaseEnableGPS = "Please Enable GPS to know your Location!";
     String[] permissionStrings = {
             Manifest.permission.ACCESS_FINE_LOCATION
     };
