@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_np_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SNavyasaiPoranki">
-        <activity android:name=".LocatorActivity"></activity>
+        <activity android:name=".LocatorActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"></activity>
         <activity android:name=".LinkCollectorActivity" />
         <activity
             android:name=".ClickActivity"
