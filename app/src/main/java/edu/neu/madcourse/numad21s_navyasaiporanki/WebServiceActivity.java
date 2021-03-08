@@ -36,7 +36,7 @@ public class WebServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_web_service);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
-
+        findViewById(R.id.txtPlainDisplay).setOnKeyListener(null);
     }
 
     public void fetchRecipes(final View view) throws InterruptedException {
