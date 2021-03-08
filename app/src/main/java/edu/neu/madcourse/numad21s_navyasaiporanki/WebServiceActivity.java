@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -27,20 +28,49 @@ import java.util.ArrayList;
 public class WebServiceActivity extends AppCompatActivity {
 
 
+    String cocktailReceived = "";
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_service);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
     }
 
-    public void fetchRecipes(final View view) {
+    public void fetchRecipes(final View view) throws InterruptedException {
+
+
         if (internetPermissions()) {
-            new Thread(new RecipesRunnable(this)).start();
+            //progressBar.setVisibility(View.VISIBLE);
+            //Thread.sleep(1000);
+            Thread thread = new Thread(new RecipesRunnable(this));
+            thread.start();
+            thread.join();
+            Thread.sleep(1000);
+            TextView textView = findViewById(R.id.textView3);
+            textView.setText(cocktailReceived);
+            //hideProgress();
+
         }
         else {
             addInternetPermissions();
         }
+    }
+
+    private void hideProgress() throws InterruptedException {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+        thread.start();
+        thread.sleep(1000);
+        thread.join();
+
+
     }
 
     private boolean internetPermissions(){
@@ -81,7 +111,7 @@ public class WebServiceActivity extends AppCompatActivity {
         private final WebServiceActivity webServiceActivity;
 
         RecipesRunnable(WebServiceActivity webServiceActivity) {
-
+            progressBar.setVisibility(View.VISIBLE);
             this.webServiceActivity = webServiceActivity;
         }
         @Override
@@ -95,9 +125,10 @@ public class WebServiceActivity extends AppCompatActivity {
                 //ArrayList<Ob> recipes = obj.get("drinks");
                 JSONArray c = obj.getJSONArray("drinks");
                 String java = c.getJSONObject(0).getString("strDrink");
-                Log.i("navyasai", c.getJSONObject(0).getString("strDrink"));
-                TextView textView = findViewById(R.id.textView3);
-                textView.setText(java);
+                //Log.i("navyasai", c.getJSONObject(0).getString("strDrink"));
+                cocktailReceived = c.getJSONObject(0).getString("strDrink");
+
+
             }
             catch (Exception ex) {
                 ex.printStackTrace();
