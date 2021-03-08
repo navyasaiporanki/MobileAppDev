@@ -57,5 +57,13 @@ public class FirstFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LocatorActivity.class));
             }
         });
+
+        Button webServiceButton = view.findViewById(R.id.btnService);
+        webServiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), WebServiceActivity.class));
+            }
+        });
     }
 }

@@ -1,0 +1,108 @@
+package edu.neu.madcourse.numad21s_navyasaiporanki;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
+public class WebServiceActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_web_service);
+
+    }
+
+    public void fetchRecipes(final View view) {
+        if (internetPermissions()) {
+            new Thread(new RecipesRunnable(this)).start();
+        }
+        else {
+            addInternetPermissions();
+        }
+    }
+
+    private boolean internetPermissions(){
+        return ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void addInternetPermissions() {
+        requestPermissions(new String[] {
+                Manifest.permission.INTERNET
+        }, 1);
+    }
+
+    private String getRequestCall(String url) throws IOException {
+
+        URLConnection urlConnection = null;
+        String charset = StandardCharsets.UTF_8.name();
+        urlConnection = new URL(url).openConnection();
+
+        urlConnection.setRequestProperty("Accept-Charset", charset);
+
+        InputStream inputStream = urlConnection.getInputStream();
+        return streamToString(inputStream);
+    }
+
+    private String streamToString(InputStream inputStream) throws IOException {
+
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            result.write(buffer, 0, len);
+        }
+        return result.toString(StandardCharsets.UTF_8.name());
+    }
+
+    class RecipesRunnable implements  Runnable {
+
+        private final WebServiceActivity webServiceActivity;
+
+        RecipesRunnable(WebServiceActivity webServiceActivity) {
+
+            this.webServiceActivity = webServiceActivity;
+        }
+        @Override
+        public void run() {
+            final String API = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+            try {
+                final String response =  getRequestCall(API);
+
+
+                JSONObject obj = new JSONObject(response);
+                //ArrayList<Ob> recipes = obj.get("drinks");
+                JSONArray c = obj.getJSONArray("drinks");
+                String java = c.getJSONObject(0).getString("strDrink");
+                Log.i("navyasai", c.getJSONObject(0).getString("strDrink"));
+                TextView textView = findViewById(R.id.textView3);
+                textView.setText(java);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+}

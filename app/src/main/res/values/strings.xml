@@ -34,4 +34,8 @@
     <string name="floatingBtn">Floating Button</string>
     <string name="btnLocation">Location</string>
     <string name="btnCurrentLocation">CurrentLocation</string>
+    <string name="btnService">WebService</string>
+    <string name="btnFetch">Cocktail Drink</string>
+    <string name="get_a_random_cocktail_drink">Click to get a Random Cocktail Drink</string>
+    <string name="txtCocktail" />
 </resources>

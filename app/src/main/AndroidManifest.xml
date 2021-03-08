@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.numad21s_navyasaiporanki">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- To request foreground location access, declare one of these permissions. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- To request foreground location access, declare one of these permissions. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,8 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_np_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SNavyasaiPoranki">
-        <activity android:name=".LocatorActivity"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"></activity>
+        <activity android:name=".WebServiceActivity"></activity>
+        <activity
+            android:name=".LocatorActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" />
         <activity android:name=".LinkCollectorActivity" />
         <activity
             android:name=".ClickActivity"
