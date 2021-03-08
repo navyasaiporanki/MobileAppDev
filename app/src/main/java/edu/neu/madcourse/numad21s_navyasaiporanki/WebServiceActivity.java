@@ -43,15 +43,12 @@ public class WebServiceActivity extends AppCompatActivity {
 
 
         if (internetPermissions()) {
-            //progressBar.setVisibility(View.VISIBLE);
-            //Thread.sleep(1000);
             Thread thread = new Thread(new RecipesRunnable(this));
             thread.start();
             thread.join();
-            Thread.sleep(1000);
+            Thread.sleep(500);
             TextView textView = findViewById(R.id.textView3);
             textView.setText(cocktailReceived);
-            //hideProgress();
 
         }
         else {
@@ -59,19 +56,6 @@ public class WebServiceActivity extends AppCompatActivity {
         }
     }
 
-    private void hideProgress() throws InterruptedException {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
-        thread.start();
-        thread.sleep(1000);
-        thread.join();
-
-
-    }
 
     private boolean internetPermissions(){
         return ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED;
@@ -119,13 +103,9 @@ public class WebServiceActivity extends AppCompatActivity {
             final String API = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
             try {
                 final String response =  getRequestCall(API);
-
-
                 JSONObject obj = new JSONObject(response);
-                //ArrayList<Ob> recipes = obj.get("drinks");
                 JSONArray c = obj.getJSONArray("drinks");
                 String java = c.getJSONObject(0).getString("strDrink");
-                //Log.i("navyasai", c.getJSONObject(0).getString("strDrink"));
                 cocktailReceived = c.getJSONObject(0).getString("strDrink");
 
 
